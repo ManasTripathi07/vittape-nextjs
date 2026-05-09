@@ -1,0 +1,69 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+:root {
+  --bg-primary: #020617;
+  --bg-card: rgba(15, 23, 42, 0.7);
+  --bg-card-hover: rgba(30, 41, 59, 0.6);
+  --border: rgba(148, 163, 184, 0.08);
+  --text-primary: #f8fafc;
+  --text-secondary: #94a3b8;
+  --brand: #32a6ff;
+  --glow-brand: 0 0 40px rgba(50,166,255,0.12);
+  --glow-green: 0 0 40px rgba(16,185,129,0.12);
+  --glow-amber: 0 0 40px rgba(245,158,11,0.12);
+  --glow-violet: 0 0 40px rgba(139,92,246,0.12);
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  -webkit-font-smoothing: antialiased;
+}
+
+@layer components {
+  .glass-card {
+    @apply rounded-2xl border border-white/[0.06] backdrop-blur-xl;
+    background: var(--bg-card);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .glass-card:hover {
+    background: var(--bg-card-hover);
+    border-color: rgba(148, 163, 184, 0.12);
+  }
+  .stat-glow { transition: box-shadow 0.3s ease; }
+  .stat-glow:hover { box-shadow: var(--glow-brand); }
+  .stat-glow-green:hover { box-shadow: var(--glow-green); }
+  .stat-glow-amber:hover { box-shadow: var(--glow-amber); }
+  .stat-glow-violet:hover { box-shadow: var(--glow-violet); }
+
+  .badge {
+    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium border;
+  }
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(148, 163, 184, 0.15); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(148, 163, 184, 0.25); }
+
+/* Custom responsive grid for Power BI-style tiles */
+.dashboard-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+@media (min-width: 1280px) {
+  .dashboard-grid { grid-template-columns: repeat(4, 1fr); }
+}
+@media (max-width: 639px) {
+  .dashboard-grid { grid-template-columns: 1fr; }
+}
